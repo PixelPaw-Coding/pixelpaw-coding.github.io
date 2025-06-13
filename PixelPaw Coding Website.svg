@@ -1,0 +1,25 @@
+<svg width="300" height="100" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cat Head -->
+  <circle cx="60" cy="50" r="30" fill="#f58220" stroke="#333" stroke-width="2"></circle>
+  
+  <!-- Cat Ears -->
+  <polygon points="40,20 50,35 30,40" fill="#f58220" stroke="#333" stroke-width="2"></polygon>
+  <polygon points="80,20 70,35 90,40" fill="#f58220" stroke="#333" stroke-width="2"></polygon>
+  
+  <!-- Inner Ears -->
+  <polygon points="42,25 48,33 34,36" fill="#555"></polygon>
+  <polygon points="78,25 72,33 86,36" fill="#555"></polygon>
+
+  <!-- Eyes -->
+  <circle cx="50" cy="50" r="6" fill="#fff" stroke="#333" stroke-width="1"></circle>
+  <circle cx="70" cy="50" r="6" fill="#fff" stroke="#333" stroke-width="1"></circle>
+  <circle cx="50" cy="50" r="3" fill="#333"></circle>
+  <circle cx="70" cy="50" r="3" fill="#333"></circle>
+  
+  <!-- Mouth / Tongue -->
+  <path d="M58 60 Q60 65 62 60" stroke="#333" stroke-width="2" fill="none"></path>
+  <circle cx="60" cy="65" r="3" fill="#e55"></circle>
+
+  <!-- Text -->
+  <text x="110" y="60" font-family="Segoe UI, sans-serif" font-size="28" fill="#0072ff">PixelPaw Coding</text>
+</svg>
