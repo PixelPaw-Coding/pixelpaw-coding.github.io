@@ -10,3 +10,7 @@ window.addEventListener('scroll', () => {
     }
   });
 });
+function loadShowcase(category) {
+  // Load and display projects by category
+  // Example: Fetch from database or local JSON
+}
