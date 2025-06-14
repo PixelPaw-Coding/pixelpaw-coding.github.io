@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox Clicker Game Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        pre {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+        code {
+            font-family: 'Fira Code', monospace;
+        }
+        h2 {
+            color: #333;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+        h3 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="container">
+        <h1 class="text-3xl font-bold text-center text-blue-700 mb-8">Creating a Simple Clicker Game in Roblox Studio (GUI Only)</h1>
+
+        <p class="mb-4">This guide will walk you through setting up a basic clicker game in Roblox Studio. You will create the necessary GUI elements and a script to handle the game logic.</p>
+
+        <h2 class="text-2xl font-semibold text-gray-800">Step 1: Set up the ScreenGui</h2>
+        <p>In Roblox Studio, go to the 'Explorer' window. Hover over 'StarterGui', click the '+' icon, and select 'ScreenGui'. This will be the parent for all your UI elements.</p>
+        <p class="text-center mt-4 text-gray-600 italic">No code needed for this step; it's done directly in Studio.</p>
+
+        <h2 class="text-2xl font-semibold text-gray-800">Step 2: Add the Score Display (TextLabel)</h2>
+        <p>Inside the newly created 'ScreenGui', click the '+' icon and add a 'TextLabel'. Rename it to 'ScoreDisplay'.</p>
+        <p>You can customize its properties in the 'Properties' window (e.g., 'Position', 'Size', 'Text', 'TextColor3', 'TextScaled', 'BackgroundColor3', 'BorderColor3', 'BorderSizePx').</p>
+        <h3>Example Properties (adjust as needed):</h3>
+<pre><code class="language-lua">-- Example properties for ScoreDisplay (set in Properties window)
+-- Text: "Score: 0"
+-- TextColor3: 255, 255, 255 (White)
+-- TextScaled: true
+-- BackgroundColor3: 0, 128, 255 (Blue)
+-- BorderSizePx: 2
+-- BorderColor3: 0, 0, 0 (Black)
+-- Position: {0.5, -50}, {0, 0} (Center top, adjust Y offset)
+-- Size: {0, 200}, {0, 50} (Width 200px, Height 50px)
+</code></pre>
+
+        <h2 class="text-2xl font-semibold text-gray-800">Step 3: Add the Clicker Button (TextButton)</h2>
+        <p>Inside the 'ScreenGui', click the '+' icon again and add a 'TextButton'. Rename it to 'ClickButton'.</p>
+        <p>Customize its properties for appearance and position.</p>
+        <h3>Example Properties (adjust as needed):</h3>
+<pre><code class="language-lua">-- Example properties for ClickButton (set in Properties window)
+-- Text: "Click Me!"
+-- TextColor3: 255, 255, 255 (White)
+-- TextScaled: true
+-- BackgroundColor3: 85, 255, 85 (Green)
+-- BorderSizePx: 2
+-- BorderColor3: 0, 0, 0 (Black)
+-- Position: {0.5, -100}, {0.5, -25} (Center of screen, adjust for button size)
+-- Size: {0, 150}, {0, 75} (Width 150px, Height 75px)
+-- Use a UIAspectRatioConstraint or UDim2 for responsive sizing if desired.
+</code></pre>
+
+        <h2 class="text-2xl font-semibold text-gray-800">Step 4: Add the LocalScript for Game Logic</h2>
+        <p>Inside the 'ClickButton', click the '+' icon and add a 'LocalScript'. Rename it to 'ClickerLogic'.</p>
+        <p>Copy and paste the following Lua code into this 'ClickerLogic' script:</p>
+<pre><code class="language-lua">--! Previous code in file: 
+-- This LocalScript controls the clicker game logic.
+-- It should be placed inside the 'ClickButton' TextButton.
+
+-- Get references to the GUI elements
+local clickButton = script.Parent
+local scoreDisplay = clickButton.Parent:WaitForChild("ScoreDisplay") -- Assumes ScoreDisplay is a sibling of ClickButton
+
+-- Initialize the player's score
+local score = 0
+
+-- Function to update the score display text
+local function updateScoreDisplay()
+    scoreDisplay.Text = "Score: " .. score
+end
+
+-- Connect the click event to increment the score
+clickButton.MouseButton1Click:Connect(function()
+    score = score + 1 -- Increment score by 1 for each click
+    updateScoreDisplay() -- Update the display
+end)
+
+-- Initialize the display when the game starts
+updateScoreDisplay()
+
+print("Clicker game loaded! Start clicking the button.")
+</code></pre>
+
+        <h2 class="text-2xl font-semibold text-gray-800">Explanation of the Lua Code:</h2>
+        <ul>
+            <li class="mb-2"><code>local clickButton = script.Parent</code>: This line gets a reference to the `ClickButton` itself, because the script is a child of the button.</li>
+            <li class="mb-2"><code>local scoreDisplay = clickButton.Parent:WaitForChild("ScoreDisplay")</code>: This line gets a reference to the `ScoreDisplay` TextLabel. It assumes `ScoreDisplay` is at the same level as `ClickButton` (both children of `ScreenGui`). `WaitForChild` is used to ensure the `ScoreDisplay` is loaded before the script tries to access it.</li>
+            <li class="mb-2"><code>local score = 0</code>: This declares a variable `score` and initializes it to 0. This variable will keep track of the player's current score.</li>
+            <li class="mb-2"><code>local function updateScoreDisplay() ... end</code>: This defines a function that updates the `Text` property of the `scoreDisplay` TextLabel to show the current score.</li>
+            <li class="mb-2"><code>clickButton.MouseButton1Click:Connect(function() ... end)</code>: This is the core of the clicker game. It connects a function to the `MouseButton1Click` event of the `clickButton`. Every time the left mouse button is clicked on the button, the function inside will execute.
+                <ul>
+                    <li><code>score = score + 1</code>: Inside the connected function, the `score` variable is incremented by 1.</li>
+                    <li><code>updateScoreDisplay()</code>: After incrementing the score, the `updateScoreDisplay` function is called to refresh the text shown on the screen.</li>
+                </ul>
+            </li>
+            <li class="mb-2"><code>updateScoreDisplay()</code>: This line calls the `updateScoreDisplay` function once when the script first runs. This ensures that "Score: 0" is displayed immediately when the game starts, before any clicks.</li>
+            <li class="mb-2"><code>print("Clicker game loaded! Start clicking the button.")</code>: This prints a message to the Roblox Studio output window, confirming that the script has loaded.</li>
+        </ul>
+
+        <h2 class="text-2xl font-semibold text-gray-800">Step 5: Test Your Game!</h2>
+        <p>Click the 'Play' button in Roblox Studio to test your game. You should see the button and the score display. Clicking the button should increment the score!</p>
+
+        <p class="mt-8 text-center text-gray-700">Congratulations! You've created a basic GUI-only clicker game in Roblox.</p>
+    </div>
+</body>
+</html>
