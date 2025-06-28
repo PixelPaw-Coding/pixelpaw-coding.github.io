@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Scratch Project Packager</title>
+  <style>
+    body { font-family: sans-serif; background: #f0f0f0; text-align: center; padding: 2em; }
+    input, button { margin-top: 1em; }
+  </style>
+</head>
+<body>
+  <h1>📦 Scratch Project Packager</h1>
+  <p>Select your <code>.sb3</code> file to package:</p>
+  <input type="file" id="sb3Input" accept=".sb3" />
+  <br />
+  <button onclick="packageProject()">Create HTML Runner</button>
+  <br />
+  <a id="downloadLink" style="display:none;" download="game.html">Download Packaged HTML</a>
+
+  <script>
+    async function packageProject() {
+      const input = document.getElementById('sb3Input');
+      if (!input.files[0]) return alert("Please choose a .sb3 file.");
+      
+      const sb3File = input.files[0];
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const blob = new Blob([`
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Scratch Game</title>
+  <script src="https://turbowarp.org/embed.js"></script>
+</head>
+<body style="margin:0">
+  <script>
+    window.addEventListener("load", () => {
+      const embed = TurboWarpEmbed.create(document.body, {
+        project: null,
+        playerOnly: true,
+        lightTheme: false
+      });
+      embed.loadProjectFromBuffer(atob("${btoa(reader.result)}"));
+    });
+  </script>
+</body>
+</html>`,], { type: "text/html" });
+
+        const link = document.getElementById("downloadLink");
+        link.href = URL.createObjectURL(blob);
+        link.style.display = "inline";
+      };
+
+      reader.readAsBinaryString(sb3File);
+    }
+  </script>
+</body>
+</html>
