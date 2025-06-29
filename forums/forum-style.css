@@ -1,0 +1,73 @@
+/* Modern theme for PixelPaw Dev Forum */
+body {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background: #f5f7fa;
+  margin: 0;
+  padding: 0;
+}
+
+.forum-container {
+  max-width: 500px;
+  margin: 40px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+input, button {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background: #4a90e2;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #357ab8;
+}
+
+.divider {
+  text-align: center;
+  margin: 20px 0;
+  font-weight: bold;
+}
+
+.link-button {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  text-decoration: none;
+  color: #4a90e2;
+}
+
+.link-button:hover {
+  text-decoration: underline;
+}
+
+.social-login button {
+  background: #e2e2e2;
+  color: black;
+}
+
+.social-login button:hover {
+  background: #d4d4d4;
+}
