@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PixelPaw Dev Forum</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="forum-style.css" />
+  <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script defer src="../script.js"></script>
+  <script defer src="forum-script.js"></script>
+</head>
+<body>
+  <div class="forum-container">
+    <h1>PixelPaw Dev Forum</h1>
+    <button id="logout-btn">Logout</button>
+
+    <h2>Create New Post</h2>
+    <form id="new-post-form">
+      <label>Post Title: <input type="text" id="post-title" required /></label>
+      <label>Post Content: <textarea id="post-content" required></textarea></label>
+      <button type="submit">Post</button>
+    </form>
+
+    <h2>Forum Posts</h2>
+    <div id="posts-container"></div>
+  </div>
+</body>
+</html>
