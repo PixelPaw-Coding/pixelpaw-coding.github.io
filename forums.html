@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PixelPaw Dev Forum - Login / Signup</title>
+<link rel="stylesheet" href="style.css" />
+<script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+<script defer src="script.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>PixelPaw Development Forum</h1>
+    <div id="user-signed-out">
+      <h2>Login / Signup</h2>
+      <form id="signup-form">
+        <h3>Create Account</h3>
+        <label>Username: <input type="text" id="signup-username" required /></label><br/>
+        <label>Email: <input type="email" id="signup-email" required /></label><br/>
+        <label>Password: <input type="password" id="signup-password" required minlength="6" /></label><br/>
+        <label>Age: <input type="number" id="signup-age" required min="7" /></label><br/>
+        <label>Bio: <textarea id="signup-bio" maxlength="250" placeholder="Tell us about yourself"></textarea></label><br/>
+        <label>Signature: <input type="text" id="signup-signature" maxlength="100" placeholder="Your signature" /></label><br/>
+        <label>Profile Picture: <input type="file" id="signup-profile-pic" accept="image/*" /></label><br/>
+        <button type="submit">Sign Up</button>
+      </form>
+      <hr />
+      <form id="login-form">
+        <h3>Login</h3>
+        <label>Email: <input type="email" id="login-email" required /></label><br/>
+        <label>Password: <input type="password" id="login-password" required /></label><br/>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+    <div id="user-signed-in" style="display:none;">
+      <p>Welcome, <span id="user-name"></span>! <button id="logout-btn">Logout</button></p>
+      <a href="forum.html">Go to Forum</a>
+    </div>
+  </div>
+</body>
+</html>
