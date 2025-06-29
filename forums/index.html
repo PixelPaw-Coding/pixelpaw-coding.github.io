@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PixelPaw Dev Forum - Login</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="forum-style.css" />
+  <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+  <script defer src="../script.js"></script>
+  <script defer src="forum-script.js"></script>
+</head>
+<body>
+  <div class="forum-container">
+    <h1>PixelPaw Development Forum</h1>
+    <div id="auth-section">
+      <form id="login-form">
+        <h2>Login</h2>
+        <label>Email: <input type="email" id="login-email" required /></label>
+        <label>Password: <input type="password" id="login-password" required /></label>
+        <label><input type="checkbox" id="stay-signed-in" /> Stay signed in</label>
+        <button type="submit">Login</button>
+      </form>
+
+      <div class="divider">OR</div>
+
+      <div class="social-login">
+        <button id="google-login">Login with Google</button>
+        <button id="github-login">Login with GitHub</button>
+      </div>
+
+      <a href="signup.html" class="link-button">Create an account</a>
+    </div>
+  </div>
+</body>
+</html>
