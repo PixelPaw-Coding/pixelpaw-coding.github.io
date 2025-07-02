@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PixelPaw Scratch Extensions</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f7fa;
+      color: #333;
+    }
+
+    header {
+      background: #4c97ff;
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      margin-top: 0.5rem;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      color: #4c97ff;
+    }
+
+    .card p {
+      margin: 0.5rem 0 1rem;
+    }
+
+    .card a {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: #4c97ff;
+      color: white;
+      text-decoration: none;
+      border-radius: 0.5rem;
+      transition: background 0.2s ease;
+    }
+
+    .card a:hover {
+      background: #377cd4;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: #888;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>PixelPaw Scratch Extensions</h1>
+    <p>Useful developer extensions for Scratch mods like TurboWarp and PenguinMod.</p>
+  </header>
+
+  <main class="container">
+    <!-- Extension Card Example -->
+    <div class="card">
+      <h2>Developer Tools</h2>
+      <p>Get FPS, clone count, project info, and use logs in the console (log, warn, error, debug).</p>
+      <a href="extensions/devtools.js" download>Download JS</a>
+      <a href="https://example.com/extensions/devtools.js" target="_blank">Load in TurboWarp</a>
+    </div>
+
+    <!-- Add more cards like the one above for each new extension -->
+  </main>
+
+  <footer>
+    &copy; 2025 PixelPaw Coding. All rights reserved.
+  </footer>
+</body>
+</html>
