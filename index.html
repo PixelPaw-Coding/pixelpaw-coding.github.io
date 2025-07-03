@@ -1,102 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="icon" href="https://via.placeholder.com/32x32.png?text=P" />
-  <meta name="description" content="PixelPaw Coding - Scratch & Roblox Tutorials for beginners and pros!" />
-<meta property="og:title" content="PixelPaw Coding" />
-<meta property="og:description" content="Scratch & Roblox tutorials to help you level up your skills." />
-<meta property="og:image" content="URL_TO_YOUR_BANNER_IMAGE" />
-<img src="PixelPaw Coding Website.svg" alt="PixelPaw Coding Website">
-  <head>
+<head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tutorial Hub</title>
-  <link rel="stylesheet" href="styles.css" />
-    <style>
-    html {
-      scroll-behavior: smooth;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PixelPaw Coding</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="PixelPaw Coding Website.svg" type="image/svg+xml" />
 </head>
 <body>
-  <header>
-    <h1 class="animate-title">🚀 Tutorial Hub</h1>
-    <p>Your one-stop guide for Scratch & Roblox!</p>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="logo">PixelPaw Coding</h1>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="/projects.html">Projects</a></li>
+          <li><a href="/blog.html">Blog</a></li>
+          <li><a href="/forum.html">Forum</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <nav>
-    <ul>
-      <li><a href="#scratch-beginner">Scratch Beginner</a></li>
-      <li><a href="#bike-sim">Bike Simulator</a></li>
-      <li><a href="#win95">Windows 95 Sim</a></li>
-      <li><a href="#full-scratcher">Full Scratcher</a></li>
-      <li><a href="#famous">Get Famous</a></li>
-      <li><a href="#roblox-studio">Roblox Studio</a></li>
-      <li><a href="#roblox-premium">Roblox Premium</a></li>
-    </ul>
-  </nav>
-
-  <main>
-    <section id="scratch-beginner" class="card">
-      <img src="https://via.placeholder.com/600x200?text=Scratch+Beginner" alt="Scratch Beginner Guide" />
-      <h2>Beginner's Guide to Scratch</h2>
-      <p>Learn the basics of Scratch and start making interactive projects today!</p>
-      <p><a href="#" class="button">Start Tutorial</a></p>
-
+  <main class="homepage-main container">
+    <section class="intro">
+      <h2>Welcome to PixelPaw Coding</h2>
+      <p>Your hub for coding projects, tutorials, and community collaboration.</p>
     </section>
 
-    <section id="bike-sim" class="card">
-      <img src="https://via.placeholder.com/600x200?text=Bike+Simulator" alt="Bike Simulator" />
-      <h2>How to Make a Bike Simulator</h2>
-      <p>Step-by-step guide to creating a fun bike simulator in Scratch.</p>
-      <p><a href="#" class="button">Start Tutorial</a></p>
-
+    <section class="featured-projects">
+      <h3>Featured Projects</h3>
+      <div class="project-list">
+        <article class="project-card">
+          <h4><a href="/projects/lego-create.html">Lego Create</a></h4>
+          <p>Create pixel-art Lego models that snap to grid. Save, load, and share your creations!</p>
+        </article>
+        <article class="project-card">
+          <h4><a href="/projects/error-clicker.html">Error Clicker</a></h4>
+          <p>A unique incremental clicker game styled like a retro computer with a mysterious twist.</p>
+        </article>
+        <article class="project-card">
+          <h4><a href="/projects/horror-game.html">Æ~^#&*7HD^&* Game</a></h4>
+          <p>A cozy start turns terrifying — a one-of-a-kind Scratch horror experience with no monsters.</p>
+        </article>
+      </div>
     </section>
 
-    <section id="win95" class="card">
-      <img src="https://via.placeholder.com/600x200?text=Windows+95+Simulator" alt="Windows 95 Simulator" />
-      <h2>Windows 95 Simulator in Scratch</h2>
-      <p>Recreate the retro experience with Scratch blocks!</p>
-      <p><a href="#" class="button">Start Tutorial</a></p>
-
-    </section>
-
-    <section id="full-scratcher" class="card">
-      <img src="https://via.placeholder.com/600x200?text=Full+Scratcher" alt="Full Scratcher" />
-      <h2>How to Become a Full Scratcher</h2>
-      <p>Unlock full Scratcher status with tips on projects, comments, and more.</p>
-      <p><a href="#" class="button">Start Tutorial</a></p>
-
-    </section>
-
-    <section id="famous" class="card">
-      <img src="https://via.placeholder.com/600x200?text=Get+Famous" alt="Get Famous on Scratch" />
-      <h2>How to Become Famous</h2>
-      <p>Discover how to get noticed and build a following!</p>
-      <p><a href="#" class="button">Start Tutorial</a></p>
-
-    </section>
-
-    <section id="roblox-studio" class="card">
-      <img src="https://via.placeholder.com/600x200?text=Roblox+Studio" alt="Roblox Studio" />
-      <h2>How to Use Roblox Studio</h2>
-      <p>Master Roblox Studio and create epic games.</p>
-      <p><a href="#" class="button">Start Tutorial</a></p>
-
-    </section>
-
-    <section id="roblox-premium" class="card">
-      <img src="https://via.placeholder.com/600x200?text=Roblox+Premium" alt="Roblox Premium" />
-      <h2>Inside Roblox Premium</h2>
-      <p>Explore the benefits and features of Roblox Premium membership.</p>
-      <p><a href="#" class="button">Start Tutorial</a></p>
-
+    <section class="community-invite">
+      <h3>Join the Community</h3>
+      <p>Discuss ideas, share projects, and get help on the <a href="/forum.html">PixelPaw Dev Forum</a>.</p>
+      <a href="/forum.html" class="btn-primary">Visit the Forum</a>
     </section>
   </main>
 
-  <footer>
-    <p>© 2025 Tutorial Hub. All rights reserved.</p>
+  <footer class="site-footer container">
+    <p>&copy; 2025 PixelPaw Coding. All rights reserved.</p>
+    <p><a href="/privacy.html">Privacy Policy</a> | <a href="/terms.html">Terms of Service</a></p>
   </footer>
-
-  <script src="scripts.js"></script>
 </body>
 </html>
