@@ -1,128 +1,29 @@
-body {
+/* Reset some basics */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f4f4f4;
-  color: #333;
-}
-
-header {
-  background: linear-gradient(135deg, #00c6ff, #0072ff);
-  color: white;
-  text-align: center;
-  padding: 2rem 1rem;
-}
-
-.animate-title {
-  animation: fadeInSlide 2s ease-out forwards;
-  opacity: 0;
-}
-
-@keyframes fadeInSlide {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  from {
-    transform: translateY(-20px);
-  }
-}
-
-nav {
-  background: white;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
   padding: 0;
-  margin: 0;
 }
 
-nav li {
-  flex: 1 1 150px;
-}
-
-nav a {
-  display: block;
-  padding: 1rem;
-  text-align: center;
-  text-decoration: none;
-  color: #0072ff;
-  transition: background 0.3s, color 0.3s;
-}
-
-nav a:hover {
-  background: #0072ff;
-  color: white;
-}
-
-main {
-  padding: 2rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-}
-
-.card {
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: transform 0.3s;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-}
-
-.card img {
-  width: 100%;
-  display: block;
-}
-
-.card h2 {
-  margin: 0.5rem 1rem;
-}
-
-.card p {
-  margin: 0 1rem 1rem;
-}
-
-footer {
-  text-align: center;
-  padding: 1rem;
-  background: #0072ff;
-  color: white;
-}
 body {
-  background: linear-gradient(-45deg, #00c6ff, #0072ff, #00c6ff, #0072ff);
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-@keyframes gradientBG {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+.container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
-nav {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
+/* Header */
 
-.button {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  background: #0072ff;
-  color: #fff;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: background 0.3s;
-}
-.button:hover {
-  background: #005bb5;
-}
+.site-header {
+  background-color
