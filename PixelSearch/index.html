@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>PixelSearch 🔍</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -10,7 +11,10 @@
 
   <header>
     <h1>PixelSearch 🔍</h1>
-    <div class="subtitle">A simple search engine by PixelPaw</div>
+   <!-- Search Box -->
+<div class="gcse-searchbox-only" data-resultsUrl="index.html" data-newWindow="false"></div>
+<!-- Search Results (same page) -->
+<div class="gcse-searchresults-only"></div>
     <button id="theme-toggle">Toggle Dark Mode</button>
   </header>
 
@@ -28,8 +32,16 @@
     &copy; 2025 PixelPaw • Built with HTML and Google CSE
   </footer>
 
-  <!-- Google Search Engine Script -->
-  <script async src="https://cse.google.com/cse.js?cx=d6be021b541c9480b"></script>
+<!-- Google CSE script -->
+<script async src="https://cse.google.com/cse.js?cx=d6be021b541c9480b"></script>
+
+<!-- PixelSearch UI -->
+<div class="gcse-searchbox-only"
+     data-resultsUrl="index.html"
+     data-newWindow="false"></div>
+
+<div class="gcse-searchresults-only"></div>
+
 
   <!-- Your Script -->
   <script src="script.js"></script>
