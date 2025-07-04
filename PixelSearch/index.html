@@ -3,47 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>PixelSearch 🔍</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
+  <!-- Header -->
   <header>
     <h1>PixelSearch 🔍</h1>
-   <!-- Search Box -->
-<div class="gcse-searchbox-only" data-resultsUrl="index.html" data-newWindow="false"></div>
-<!-- Search Results (same page) -->
-<div class="gcse-searchresults-only"></div>
+    <div class="subtitle">A simple search engine by PixelPaw</div>
     <button id="theme-toggle">Toggle Dark Mode</button>
   </header>
 
+  <!-- Main Content -->
   <main>
     <p>Search across the web or specific sites using PixelSearch. Powered by Google Custom Search.</p>
 
-    <!-- Search Bar -->
+    <!-- Google Custom Search Box -->
     <div class="gcse-searchbox-only" data-resultsUrl="index.html" data-newWindow="false"></div>
 
-    <!-- Search Results appear here -->
+    <!-- Search Results (Appears Below the Search Bar) -->
     <div class="gcse-searchresults-only"></div>
   </main>
 
+  <!-- Footer -->
   <footer>
     &copy; 2025 PixelPaw • Built with HTML and Google CSE
   </footer>
 
-<!-- Google CSE script -->
-<script async src="https://cse.google.com/cse.js?cx=d6be021b541c9480b"></script>
+  <!-- Google Custom Search Script -->
+  <script async src="https://cse.google.com/cse.js?cx=d6be021b541c9480b"></script>
 
-<!-- PixelSearch UI -->
-<div class="gcse-searchbox-only"
-     data-resultsUrl="index.html"
-     data-newWindow="false"></div>
-
-<div class="gcse-searchresults-only"></div>
-
-
-  <!-- Your Script -->
+  <!-- Your Custom JavaScript (for Theme Toggle) -->
   <script src="script.js"></script>
 </body>
 </html>
