@@ -4,92 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>PixelSearch 🔍</title>
-  <meta name="description" content="PixelSearch - A simple custom search engine created by PixelPaw." />
-  <style>
-    :root {
-      --bg-color: #f9f9f9;
-      --text-color: #333;
-      --header-bg: #292b36;
-      --header-text: #fff;
-      --subtitle-color: #ccc;
-      --footer-color: #999;
-      --border-color: #eee;
-    }
-
-    body.dark-mode {
-      --bg-color: #181a1f;
-      --text-color: #eee;
-      --header-bg: #1e1f26;
-      --header-text: #f0f0f0;
-      --subtitle-color: #999;
-      --footer-color: #666;
-      --border-color: #333;
-    }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: var(--bg-color);
-      color: var(--text-color);
-      margin: 0;
-      padding: 0;
-      transition: background 0.3s, color 0.3s;
-    }
-
-    header {
-      background: var(--header-bg);
-      color: var(--header-text);
-      padding: 20px;
-      text-align: center;
-      position: relative;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 2.5em;
-    }
-
-    .subtitle {
-      font-size: 1.1em;
-      color: var(--subtitle-color);
-      margin-top: 5px;
-    }
-
-    main {
-      padding: 30px 20px;
-      max-width: 800px;
-      margin: auto;
-    }
-
-    .gcse-search {
-      margin-top: 30px;
-    }
-
-    footer {
-      text-align: center;
-      font-size: 0.9em;
-      color: var(--footer-color);
-      padding: 20px;
-      border-top: 1px solid var(--border-color);
-      margin-top: 50px;
-    }
-
-    #theme-toggle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      padding: 5px 10px;
-      background: transparent;
-      border: 1px solid var(--subtitle-color);
-      border-radius: 5px;
-      color: var(--subtitle-color);
-      cursor: pointer;
-      font-size: 0.9em;
-    }
-
-    #theme-toggle:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
@@ -102,11 +17,21 @@
   <main>
     <p>Search across the web or specific sites using PixelSearch. Powered by Google Custom Search.</p>
 
-    <!-- Google Custom Search Code -->
-    <script async src="https://cse.google.com/cse.js?cx=d6be021b541c9480b"></script>
-    <div class="gcse-search"></div>
+    <!-- Search Bar -->
+    <div class="gcse-searchbox-only" data-resultsUrl="index.html" data-newWindow="false"></div>
+
+    <!-- Search Results appear here -->
+    <div class="gcse-searchresults-only"></div>
   </main>
 
   <footer>
     &copy; 2025 PixelPaw • Built with HTML and Google CSE
-  </footer
+  </footer>
+
+  <!-- Google Search Engine Script -->
+  <script async src="https://cse.google.com/cse.js?cx=d6be021b541c9480b"></script>
+
+  <!-- Your Script -->
+  <script src="script.js"></script>
+</body>
+</html>
