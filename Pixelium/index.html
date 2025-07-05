@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pixelium Browser</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">🌐 Pixelium</div>
+    <input id="url" type="text" placeholder="Enter URL (e.g. example.com)">
+    <button onclick="go()">Go</button>
+    <button onclick="toggleTheme()">🌓</button>
+  </header>
+
+  <main>
+    <iframe id="viewer" src="https://start.duckduckgo.com" sandbox="allow-same-origin allow-scripts allow-forms"></iframe>
+  </main>
+
+  <footer>
+    <p>Pixelium Web Store coming soon.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
