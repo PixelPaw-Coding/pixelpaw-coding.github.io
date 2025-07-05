@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>404 - Page Not Found</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> <!-- Pixelated font -->
+    <style>
+        body {
+            background-color: #000000; /* Black background for retro feel */
+            color: #00FF00; /* Classic green text */
+            font-family: 'Press Start 2P', cursive;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .container {
+            border: 10px solid #00FF00; /* Green border */
+            padding: 50px;
+            width: 80%;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #000;
+            box-shadow: 0 0 20px #00FF00;
+        }
+
+        .error-code {
+            font-size: 72px;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        .home-link {
+            font-size: 18px;
+            color: #00FF00;
+            text-decoration: none;
+            border: 2px solid #00FF00;
+            padding: 10px 20px;
+            transition: all 0.3s;
+        }
+
+        .home-link:hover {
+            background-color: #00FF00;
+            color: #000;
+            border-color: #000;
+        }
+
+        .pixel-screen {
+            background: url('https://via.placeholder.com/800x600.png?text=Pixelated+Screen') no-repeat center center fixed;
+            background-size: cover;
+            border: 10px solid #00FF00;
+            padding: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="pixel-screen">
+            <p class="error-code">404</p>
+            <p class="message">Oops! Page Not Found.</p>
+            <a href="/" class="home-link">Go to Homepage</a>
+        </div>
+    </div>
+</body>
+</html>
