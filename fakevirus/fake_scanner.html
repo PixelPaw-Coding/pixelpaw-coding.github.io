@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head><title>System Scan</title></head>
+<body style="background-color:black;color:lime;font-family:monospace">
+  <h1>Scanning your system...</h1>
+  <pre id="scanlog"></pre>
+  <script>
+    const log = document.getElementById("scanlog");
+    let count = 0;
+    setInterval(() => {
+      log.textContent += "Found: trojan_" + Math.floor(Math.random()*99999) + ".exe\n";
+      count++;
+      if (count > 30) log.textContent += "\nScan Complete. 33 threats found.";
+    }, 200);
+  </script>
+</body>
+</html>
