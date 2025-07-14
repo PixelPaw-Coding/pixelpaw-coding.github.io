@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Face Arrow Control</title>
+  <style>
+    body { text-align: center; background: #111; color: white; }
+    video, canvas { display: block; margin: auto; }
+  </style>
+</head>
+<body>
+  <h1>Face Arrow Control</h1>
+  <p>Move your face to simulate Arrow Keys</p>
+  <video id="video" width="640" height="480" autoplay muted playsinline></video>
+  <canvas id="canvas" width="640" height="480"></canvas>
+  <p>(Click once on this page before testing to enable key events)</p>
+
+  <!-- TensorFlow.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.16.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection@1.0.3"></script>
+  <!-- Main Script -->
+  <script src="face.js"></script>
+</body>
+</html>
