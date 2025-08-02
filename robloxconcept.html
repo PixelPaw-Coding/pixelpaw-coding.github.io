@@ -235,12 +235,11 @@
     }
 
     function downloadPPRC() {
-      // Create a fake .exe file for demo purposes (empty file)
       const blob = new Blob([''], { type: 'application/octet-stream' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'PPRC.exe';
+      a.download = 'PixelPaw ROBLOX Concept-win32-x64.zip';
       document.body.appendChild(a);
       a.click();
       setTimeout(() => {
