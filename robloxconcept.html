@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>PixelPaw ROBLOX Concept</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      color: #222;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background-color: #0078d7;
+      color: white;
+      padding: 20px 40px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    header h1 {
+      font-weight: 700;
+      font-size: 2.5rem;
+      margin: 0;
+      font-family: 'Segoe UI Black', 'Arial Black', sans-serif;
+    }
+    header .tagline {
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.2rem;
+      margin-top: 6px;
+    }
+    main {
+      max-width: 800px;
+      margin: 20px auto 40px;
+      padding: 0 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .logo {
+      color: #e2231a;
+      font-family: 'Arial Black', sans-serif;
+      font-size: 4rem;
+      letter-spacing: -0.08em;
+      user-select: none;
+      margin-bottom: 10px;
+    }
+    .currencies {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      margin: 30px 0;
+      flex-wrap: wrap;
+    }
+    .currency {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 100px;
+    }
+    .currency-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 900;
+      font-size: 2.8rem;
+      color: white;
+      user-select: none;
+      box-shadow: 0 4px 8px rgb(0 0 0 / 0.2);
+    }
+    .robux {
+      background: #1a7a32;
+    }
+    .tix {
+      background: #e4b700;
+    }
+    section {
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 6px 14px rgb(0 0 0 / 0.1);
+      padding: 20px 30px;
+      margin-top: 40px;
+      width: 100%;
+      max-width: 600px;
+    }
+    section h2 {
+      color: #0078d7;
+      margin-top: 0;
+    }
+    .builder-club-logo {
+      font-weight: 700;
+      font-size: 2rem;
+      color: #0078d7;
+      font-family: 'Segoe UI Black', 'Arial Black', sans-serif;
+      margin-top: 10px;
+      user-select: none;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #666;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    button#getAppBtn {
+      background-color: #e2231a;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 25px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      margin-top: 25px;
+      box-shadow: 0 4px 8px rgb(0 0 0 / 0.15);
+      transition: background-color 0.3s ease;
+      user-select: none;
+      width: 250px;
+      max-width: 90vw;
+    }
+    button#getAppBtn:hover {
+      background-color: #c01a13;
+    }
+    #addToHomeMessage {
+      margin-top: 15px;
+      font-size: 1rem;
+      color: #444;
+      min-height: 24px;
+      user-select: none;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 600px) {
+      header {
+        padding: 15px 20px;
+      }
+      header h1 {
+        font-size: 2rem;
+      }
+      main {
+        margin: 15px 10px 30px;
+      }
+      .logo {
+        font-size: 3rem;
+      }
+      .currencies {
+        gap: 25px;
+      }
+      button#getAppBtn {
+        font-size: 1rem;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ROBLOX</h1>
+    <div class="tagline">Powering Imagination</div>
+  </header>
+  <main>
+    <div class="logo" aria-label="ROBLOX Logo">ROBLOX</div>
+
+    <div class="currencies">
+      <div class="currency">
+        <div class="currency-icon robux" aria-label="Robux currency symbol">R</div>
+        <div>Robux (Green)</div>
+      </div>
+      <div class="currency">
+        <div class="currency-icon tix" aria-label="TIX currency symbol">T</div>
+        <div>TIX (Yellow)</div>
+      </div>
+    </div>
+
+    <section>
+      <h2>Builder’s Club Revival</h2>
+      <p>Bring back Builder’s Club with a simplified classic logo and blue-themed header to revive community spirit and nostalgia.</p>
+      <div class="builder-club-logo">Builder’s Club</div>
+    </section>
+
+    <button id="getAppBtn">Get PixelPaw ROBLOX Concept app</button>
+    <div id="addToHomeMessage"></div>
+  </main>
+
+  <footer>
+    <p>Concept by PixelPaw — Inspired by your ideas for ROBLOX branding</p>
+  </footer>
+
+  <script>
+    const getAppBtn = document.getElementById('getAppBtn');
+    const addToHomeMessage = document.getElementById('addToHomeMessage');
+
+    // For PWA add to home screen event (Android)
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      if(isMobile()) {
+        addToHomeMessage.textContent = 'Tap the button above to install the app!';
+      }
+    });
+
+    getAppBtn.addEventListener('click', () => {
+      if (isMobile()) {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+              addToHomeMessage.textContent = 'Thanks for installing!';
+            } else {
+              addToHomeMessage.textContent = 'Installation dismissed.';
+            }
+            deferredPrompt = null;
+          });
+        } else {
+          // For iOS or if beforeinstallprompt not supported
+          addToHomeMessage.textContent = 'To install, open your browser menu and tap "Add to Home Screen".';
+        }
+      } else {
+        // Desktop: trigger file download
+        downloadPPRC();
+      }
+    });
+
+    function isMobile() {
+      return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    }
+
+    function downloadPPRC() {
+      // Create a fake .exe file for demo purposes (empty file)
+      const blob = new Blob([''], { type: 'application/octet-stream' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'PPRC.exe';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => {
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }, 100);
+    }
+  </script>
+</body>
+</html>
