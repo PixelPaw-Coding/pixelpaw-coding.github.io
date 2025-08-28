@@ -1,54 +1,77 @@
-body {
-  background: #111;
-  color: #0f0; /* green CRT text */
-  font-family: "Courier New", monospace;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+/* Fullscreen + light theme */
+html, body {
   margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+  font-family: "Courier New", monospace;
+  background: #eee;
+  color: #222;
 }
 
-/* retro window */
-.window {
-  border: 3px solid #0f0;
-  box-shadow: 0 0 20px #0f0;
-  width: 800px;
-  height: 600px;
-  display: flex;
-  flex-direction: column;
-  background: #000;
-}
-
-.titlebar {
-  background: #030;
-  color: #0f0;
-  padding: 5px;
-  text-align: center;
-  border-bottom: 2px solid #0f0;
-}
-
+/* Toolbar styling */
 .toolbar {
-  background: #010;
-  padding: 5px;
-  border-bottom: 2px solid #0f0;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  background: #f5f5f5;
+  border-bottom: 2px solid #ccc;
+  padding: 8px 12px;
+  z-index: 1000;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-size: 14px;
 }
 
-.toolbar button {
-  background: black;
-  border: 2px solid #0f0;
-  color: #0f0;
-  font-family: inherit;
-  cursor: pointer;
-  margin-right: 5px;
-}
-
-.toolbar button:hover {
-  background: #030;
-}
-
+/* Canvas fills the rest of screen */
 #canvas {
-  flex: 1;
-  background: #000;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 40px);
+  background: #fff;
   cursor: crosshair;
+  image-rendering: pixelated;
 }
+
+/* VHS effect overlay using pseudo-element */
+body::after {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0,0,0,0.03),
+    rgba(0,0,0,0.03) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  mix-blend-mode: overlay;
+  animation: flicker 0.1s infinite;
+}
+
+@keyframes flicker {
+  0% {opacity: 0.04;}
+  50% {opacity: 0.08;}
+  100% {opacity: 0.04;}
+}
+
+input[type="color"] {
+  cursor: pointer;
+  border: 1px solid #999;
+  height: 24px;
+  width: 36px;
+}
+input[type="range"] {
+  cursor: pointer;
+}
+button {
+  cursor: pointer;
+  background: #ddd;
+  border: 1px solid #999;
+  padding: 4px 8px;
+}
+button:hover { background: #ccc; }
