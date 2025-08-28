@@ -1,31 +1,38 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-canvas.width = 800;
-canvas.height = 500;
-
-let drawing = false;
 let tool = "pen";
+let penColor = document.getElementById("colorPicker").value;
+let penSize = document.getElementById("sizePicker").value;
 
-function setTool(selected) {
-  tool = selected;
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight - 40; // leave toolbar space
 }
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
 
-function clearCanvas() {
-  ctx.fillStyle = "#000";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-}
+// Tool selection
+function setTool(t) { tool = t; }
 
-canvas.addEventListener("mousedown", () => { drawing = true; });
-canvas.addEventListener("mouseup", () => { drawing = false; ctx.beginPath(); });
+// Update color/size
+document.getElementById("colorPicker").addEventListener("input", e => penColor = e.target.value);
+document.getElementById("sizePicker").addEventListener("input", e => penSize = e.target.value);
+
+// Drawing
+let drawing = false;
+canvas.addEventListener("mousedown", ()=> drawing = true);
+canvas.addEventListener("mouseup", ()=> { drawing=false; ctx.beginPath(); });
+canvas.addEventListener("mouseout", ()=> { drawing=false; ctx.beginPath(); });
+
 canvas.addEventListener("mousemove", draw);
 
 function draw(e) {
-  if (!drawing) return;
+  if(!drawing) return;
 
-  ctx.lineWidth = (tool === "eraser") ? 20 : 2;
-  ctx.strokeStyle = (tool === "eraser") ? "#000" : "#0f0";
+  ctx.lineWidth = (tool==="eraser")?30:penSize;
   ctx.lineCap = "round";
+  ctx.strokeStyle = (tool==="eraser")?"#fff":penColor;
 
   ctx.lineTo(e.offsetX, e.offsetY);
   ctx.stroke();
@@ -33,5 +40,9 @@ function draw(e) {
   ctx.moveTo(e.offsetX, e.offsetY);
 }
 
-// Start with a cleared screen
+// Clear canvas
+function clearCanvas() {
+  ctx.fillStyle = "#fff";
+  ctx.fillRect(0,0,canvas.width, canvas.height);
+}
 clearCanvas();
