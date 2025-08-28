@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Retro Draw</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>RetroDraw 80s</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="window">
-    <div class="titlebar">RetroDraw 1987</div>
-    <div class="toolbar">
-      <button onclick="setTool('pen')">✏ Pen</button>
-      <button onclick="setTool('eraser')">⌫ Eraser</button>
-      <button onclick="clearCanvas()">☒ Clear</button>
-    </div>
-    <canvas id="canvas"></canvas>
+  <div class="toolbar">
+    <label>Pen Color: <input type="color" id="colorPicker" value="#000000"></label>
+    <label>Pen Size: <input type="range" id="sizePicker" min="1" max="30" value="2"></label>
+    <button onclick="setTool('pen')">✏ Pen</button>
+    <button onclick="setTool('eraser')">⌫ Eraser</button>
+    <button onclick="clearCanvas()">☒ Clear</button>
   </div>
+  <canvas id="canvas"></canvas>
   <script src="script.js"></script>
 </body>
 </html>
