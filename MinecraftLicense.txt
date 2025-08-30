@@ -1,0 +1,21 @@
+PixelPaw All-Purpose License - 2025
+
+1. Ownership
+All content created by PixelPaw, including but not limited to mods, resource packs, data packs, mod packs, plugins, textures, code, and media assets, are the exclusive property of PixelPaw.
+
+2. Personal Use
+This content is provided solely for personal, non-commercial use. Any other use, including commercial exploitation, redistribution, or incorporation into other projects, requires prior written permission from PixelPaw.
+
+3. Redistribution
+Free redistribution is allowed only if the content is unmodified and proper credit is given to PixelPaw. Selling, sublicensing, or claiming it as your own is strictly prohibited.
+
+4. Modifications
+You may modify the content for personal use only. Modified versions may not be distributed commercially, and credit to PixelPaw must be maintained.
+
+5. Commercial Use
+Any commercial use, including but not limited to monetized videos, merchandise, or software, requires explicit written permission from PixelPaw.
+
+6. Disclaimer of Liability
+All content is provided "as-is." PixelPaw is not responsible for any damages, data loss, or technical issues resulting from the use of this content.
+
+Violation of these terms may result in legal action.
