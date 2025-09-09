@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frutiger Aero Archive</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="light-mode">
+
+    <!-- Header -->
+    <header>
+        <h1>Frutiger Aero Archive</h1>
+        <button id="settingsBtn">⚙️ Settings</button>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#intro">Introduction 👋</a></li>
+            <li><a href="#flash">Flash Medias ⚡</a></li>
+            <li><a href="#movies">Old Movies 🎞️</a></li>
+            <li><a href="#arts">Arts 🎨</a></li>
+            <li><a href="#wallpapers">Wallpapers 🖼️</a></li>
+            <li><a href="#merch">Merchandise 👕</a></li>
+            <li><a href="#plugins">Plugins 🧩</a></li>
+            <li><a href="#toys">Old Toys 🧸</a></li>
+            <li><a href="#apps">Old Apps 📋</a></li>
+            <li><a href="#other">Other... 🔵</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Chapter 1 -->
+        <section id="intro">
+            <h2>Introduction 👋</h2>
+            <p>Welcome to the Frutiger Aero Archive! Explore nostalgic content from the early 2000s and beyond. Play games, watch videos, listen to music, and view retro art.</p>
+        </section>
+
+        <!-- Chapter 2 -->
+        <section id="flash">
+            <h2>Flash Medias ⚡</h2>
+            <p>Classic Flash games and animations from early 2000s. Examples: Line Rider, Fancy Pants Adventure.</p>
+            <div class="flash-gallery">
+                <img src="images/line-rider.png" alt="Line Rider Screenshot">
+                <img src="images/fancy-pants.png" alt="Fancy Pants Adventure">
+            </div>
+        </section>
+
+        <!-- Chapter 3 -->
+        <section id="movies">
+            <h2>Old Movies 🎞️</h2>
+            <p>Popular movies and cartoons of the early 2000s.</p>
+            <div class="media-gallery">
+                <video controls>
+                    <source src="media/shrek-trailer.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </section>
+
+        <!-- Chapter 4 -->
+        <section id="arts">
+            <h2>Arts 🎨</h2>
+            <p>Pixel art, fan art, and digital creations from early 2000s.</p>
+            <div class="arts-gallery">
+                <img src="images/pixel-art1.png" alt="Pixel Art 1">
+            </div>
+        </section>
+
+        <!-- Chapter 5 -->
+        <section id="wallpapers">
+            <h2>Wallpapers 🖼️</h2>
+            <p>Retro desktop backgrounds and Frutiger Aero style wallpapers.</p>
+            <div class="wallpaper-gallery">
+                <img src="images/wallpaper1.png" alt="Wallpaper 1">
+            </div>
+        </section>
+
+        <!-- Chapter 6: Merchandise -->
+        <section id="merch">
+            <h2>Merchandise 👕</h2>
+            <p>Collectible items from early 2000s, including toys and clothing.</p>
+        </section>
+
+        <!-- Chapter 7: Plugins -->
+        <section id="plugins">
+            <h2>Plugins 🧩</h2>
+            <p>Add retro themes and mods for games and apps.</p>
+            <ul>
+                <li><strong>Roblox Themes:</strong> .roblokis files (requires Roblokis extension)</li>
+                <li><strong>Minecraft Contents:</strong> Mods, resource packs, modpacks, and shaders (give credits!)</li>
+                <li><strong>Scratch Themes:</strong> userstyles.world, requires <a href="https://github.com/openstyles/stylus/releases" target="_blank">Stylus Extension</a></li>
+                <li><strong>3rd Party PC Apps:</strong> RetroBar, OpenShell, etc. ⚠️ Use with caution!</li>
+            </ul>
+        </section>
+
+        <!-- Chapter 8: Old Toys -->
+        <section id="toys">
+            <h2>Old Toys 🧸</h2>
+            <p>Classic toys from your childhood: Tamagotchis, Game Boy, LEGO sets.</p>
+        </section>
+
+        <!-- Chapter 9: Old Apps -->
+        <section id="apps">
+            <h2>Old Apps 📋</h2>
+            <p>Winamp, early MSN Messenger, Paint 2000, and other classic apps.</p>
+        </section>
+
+        <!-- Chapter 10: Other -->
+        <section id="other">
+            <h2>Other... 🔵</h2>
+            <p>Miscellaneous nostalgic content, early websites, tech ads, and memes.</p>
+        </section>
+    </main>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span id="closeSettings" class="close">&times;</span>
+            <h3>Settings ⚙️</h3>
+            <div>
+                <button id="themeToggle">Toggle Dark/Light Mode</button>
+            </div>
+            <div>
+                <label for="languageSelect">Select Language:</label>
+                <select id="languageSelect">
+                    <option value="en">English</option>
+                    <option value="th">Thai</option>
+                    <option value="fr">French</option>
+                    <option value="es">Spanish</option>
+                </select>
+            </div>
+            <div>
+                <p>Credits: Frutiger Aero Archive content by contributors. Games and media files belong to original creators.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
