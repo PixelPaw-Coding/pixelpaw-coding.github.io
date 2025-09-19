@@ -1,0 +1,179 @@
+/* ===== Root Variables ===== */
+:root {
+  --font-body: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-heading: "Poppins", "Segoe UI", sans-serif;
+
+  /* Light theme */
+  --color-bg: #ffffff;
+  --color-text: #1a1a1a;
+  --color-accent: #3b82f6;
+  --color-muted: #666;
+  --color-header: #f8f9fa;
+  --color-border: #e5e7eb;
+}
+
+[data-theme="dark"] {
+  --color-bg: #121212;
+  --color-text: #e5e5e5;
+  --color-accent: #60a5fa;
+  --color-muted: #aaa;
+  --color-header: #1e1e1e;
+  --color-border: #2a2a2a;
+}
+
+/* ===== Base Styles ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  min-height: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-accent);
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-text);
+}
+
+/* ===== Header ===== */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--color-header);
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--color-accent);
+}
+
+nav {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+nav a {
+  font-weight: 500;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+}
+
+nav a:hover {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+#theme-toggle {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+#theme-toggle:hover {
+  transform: scale(1.1);
+}
+
+/* ===== Main Sections ===== */
+main {
+  padding: 2rem;
+  max-width: 900px;
+  margin: auto;
+}
+
+.hero {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.hero h1 {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: var(--color-muted);
+}
+
+.about,
+.links {
+  margin: 3rem 0;
+}
+
+.about h2,
+.links h2 {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.about p {
+  color: var(--color-text);
+}
+
+.links ul {
+  list-style: none;
+  padding-left: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.links li a {
+  display: block;
+  background: var(--color-header);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  transition: background 0.2s ease;
+}
+
+.links li a:hover {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* ===== Footer ===== */
+footer {
+  text-align: center;
+  padding: 2rem;
+  background: var(--color-header);
+  border-top: 1px solid var(--color-border);
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+}
