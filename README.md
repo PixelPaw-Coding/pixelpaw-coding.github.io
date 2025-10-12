@@ -71,7 +71,7 @@ This project is **MIT licensed**. See the [LICENSE](LICENSE) file for details.
 Pixelpaw Paramounth  
 
 - Website: [pixelpaw-coding.github.io](https://pixelpaw-coding.github.io)  
-- GitHub: [https://github.com/PixelpawParamounth](https://github.com/PixelpawParamounth)
+- GitHub: [https://github.com/PixelpawParamounth](https://github.com/PixelPaw-Coding)
 
 ---
 
