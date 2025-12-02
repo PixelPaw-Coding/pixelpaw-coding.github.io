@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>iScratch — Mobile Scratch-like Editor</title>
+
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="iScratch">
+<style>
+  :root{
+    --bg:#0f1724;
+    --panel:#0b1522;
+    --accent:#3aa1ff;
+    --muted:#98a0b3;
+    --card:#0e1a2a;
+    --text:#e6eef8;
+    --danger:#ff6b6b;
+    --rounded:14px;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+  html,body{height:100%;margin:0;background:linear-gradient(180deg,#071027 0%, #0b2236 100%);color:var(--text);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+  .app{display:flex;flex-direction:column;height:100vh;gap:8px;padding:10px;box-sizing:border-box}
+  header{display:flex;align-items:center;gap:10px}
+  header h1{font-size:18px;margin:0}
+  header .controls{margin-left:auto;display:flex;gap:6px}
+  button{background:var(--accent);border:none;color:#021028;padding:8px 12px;border-radius:10px;font-weight:600}
+  button.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text);padding:6px 10px}
+  .main{display:flex;gap:8px;flex:1;min-height:0}
+  /* left: palette + scripts */
+  .left{width:420px;max-width:45%;min-width:300px;display:flex;flex-direction:column;gap:8px;overflow:hidden}
+  .right{flex:1;display:flex;flex-direction:column;gap:8px}
+  .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));border-radius:var(--rounded);padding:10px;box-sizing:border-box;box-shadow:0 6px 20px rgba(0,0,0,0.4)}
+  /* palette */
+  .palette{display:flex;flex-direction:column;gap:8px;max-height:38vh;overflow:auto;padding:6px}
+  .block{user-select:none;border-radius:10px;padding:10px 12px;margin:6px 0;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.05));display:inline-block;color:var(--text);font-weight:700;touch-action:none}
+  .block.move{background:linear-gradient(180deg,#ffd27a,#ffb84d);color:#1b0a00}
+  .block.turn{background:linear-gradient(180deg,#b2c7ff,#7898ff);color:#021132}
+  .block.say{background:linear-gradient(180deg,#ccefcf,#8fe79a);color:#072b08}
+  .block.wait{background:linear-gradient(180deg,#e7d7ff,#d0b6ff);color:#2b083a}
+  .block.repeat{background:linear-gradient(180deg,#ffd6e0,#ffb0c9);color:#2b0416}
+  /* scripts area */
+  .scripts{flex:1;overflow:auto;padding:8px;min-height:140px;display:flex;flex-direction:column;gap:6px}
+  .scripts.drop-hover{outline:2px dashed rgba(58,161,255,0.6);border-radius:10px}
+  .script-block{padding:10px;border-radius:12px;background:rgba(255,255,255,0.02);display:flex;align-items:center;gap:8px;touch-action:none}
+  .script-block .label{flex:1;font-weight:700}
+  .script-block .small{font-weight:600;opacity:0.9;padding:6px;background:rgba(0,0,0,0.12);border-radius:8px}
+  .script-block .handle{width:22px;height:22px;background:rgba(255,255,255,0.03);border-radius:6px}
+  .toolbar{display:flex;gap:8px;align-items:center}
+  /* stage */
+  .stage{flex:1;display:flex;flex-direction:column;gap:8px}
+  .stage-top{display:flex;gap:8px;align-items:center}
+  .stage-view{background:linear-gradient(180deg,#0b2a3a,#05202a);border-radius:12px;height:100%;min-height:320px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.03)}
+  .sprite{position:absolute;left:40%;top:40%;width:96px;height:96px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:#fff;color:#012;transform-origin:center center;box-shadow:0 8px 30px rgba(0,0,0,0.6)}
+  .sprite .name{font-weight:800}
+  .inspector{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .controls-mobile{display:none}
+  /* responsive */
+  @media (max-width:900px){
+    .main{flex-direction:column}
+    .left{width:100%;max-width:100%;min-width:0;order:2}
+    .right{order:1}
+    .controls-mobile{display:flex;gap:6px}
+    header .controls{display:none}
+  }
+  /* small helper UI */
+  .project-meta{font-size:12px;color:var(--muted)}
+  .pill{padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.03);font-weight:700}
+  .footer{font-size:12px;color:var(--muted);text-align:center;padding:6px}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>iScratch</h1>
+    <div class="project-meta">Mobile-first Scratch-like editor</div>
+    <div class="controls">
+      <button id="runBtn">Run</button>
+      <button id="stopBtn" class="ghost">Stop</button>
+      <button id="saveBtn" class="ghost">Save</button>
+      <button id="loadBtn" class="ghost">Load</button>
+      <button id="exportBtn" class="ghost">Export</button>
+      <button id="importBtn" class="ghost">Import</button>
+    </div>
+    <div class="controls-mobile">
+      <button id="runBtnM">Run</button>
+      <button id="stopBtnM" class="ghost">Stop</button>
+    </div>
+  </header>
+
+  <div class="main">
+    <div class="left">
+      <div class="card" style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <strong>Blocks</strong>
+          <div class="pill">Drag to Scripts</div>
+        </div>
+        <div class="palette" id="palette">
+          <div class="block move" data-block='{"type":"move","params":{"steps":20}}' draggable="false">move (steps) 20</div>
+          <div class="block turn" data-block='{"type":"turn","params":{"deg":15}}' draggable="false">turn (degrees) 15</div>
+          <div class="block say" data-block='{"type":"say","params":{"text":"Hello","secs":1}}' draggable="false">say (message) "Hello"</div>
+          <div class="block wait" data-block='{"type":"wait","params":{"secs":0.5}}' draggable="false">wait (seconds) 0.5</div>
+          <div class="block repeat" data-block='{"type":"repeat","params":{"times":5},"body":[]}'>repeat (times) 5 { ... }</div>
+          <div class="block" data-block='{"type":"setxy","params":{"x":0,"y":0}}'>set x:(x) y:(y)</div>
+        </div>
+        <div style="font-size:12px;color:var(--muted)">Tip: drag blocks to the scripts panel. Tap Run. Touch supported.</div>
+      </div>
+
+      <div class="card" style="display:flex;flex-direction:column;gap:6px;flex:1;min-height:180px">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <strong>Scripts</strong>
+          <div class="project-meta">Sprites: <span id="spriteCount">1</span></div>
+        </div>
+        <div id="scriptsArea" class="scripts"></div>
+        <div style="display:flex;gap:8px;align-items:center;justify-content:flex-end">
+          <button id="clearScripts" class="ghost">Clear</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="right">
+      <div style="display:flex;gap:8px">
+        <div class="card inspector" style="flex:1;align-items:center;justify-content:space-between">
+          <div>
+            <div><strong>Stage</strong></div>
+            <div class="project-meta">Tap sprite to select, drag to move</div>
+          </div>
+          <div style="display:flex;gap:8px">
+            <div class="pill">x: <span id="spriteX">0</span></div>
+            <div class="pill">y: <span id="spriteY">0</span></div>
+            <div class="pill">rot: <span id="spriteRot">0</span></div>
+          </div>
+        </div>
+        <div class="card" style="width:160px;min-width:120px;display:flex;flex-direction:column;gap:8px;align-items:center;justify-content:center">
+          <button id="addSprite" class="ghost">+ Add Sprite</button>
+          <button id="duplicateSprite" class="ghost">Duplicate</button>
+          <button id="deleteSprite" class="ghost" style="background:var(--danger);color:#fff">Delete</button>
+        </div>
+      </div>
+
+      <div class="stage card" style="padding:8px;flex:1">
+        <div class="stage-top" style="gap:8px">
+          <div style="display:flex;gap:8px;align-items:center">
+            <div style="font-weight:800">Stage View</div>
+            <div class="project-meta">Touch to focus sprite</div>
+          </div>
+          <div style="margin-left:auto;display:flex;gap:8px">
+            <div class="pill" id="status">Idle</div>
+          </div>
+        </div>
+        <div id="stageView" class="stage-view" role="application" aria-label="Stage">
+          <!-- sprite elements injected here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer card">iScratch — lightweight mobile Scratch-like editor • Local-only by default</div>
+</div>
+
+<script>
+/* -------------------------
+   Basic app data & helpers
+   ------------------------- */
+const app = {
+  sprites: [],
+  selectedSpriteIndex: 0,
+  running: false,
+  execToken: {stop:false},
+};
+
+function uid(prefix='id'){return prefix+Math.random().toString(36).slice(2,9)}
+function clamp(v,min,max){return Math.max(min,Math.min(max,v))}
+
+/* -------------------------
+   Sprite model
+   ------------------------- */
+function createSprite(name='Sprite',opts={}){
+  return {
+    id: uid('s_'),
+    name: name,
+    x: opts.x ?? 0,
+    y: opts.y ?? 0,
+    rot: opts.rot ?? 0,
+    costume: opts.costume ?? null,
+    scripts: [], // array of block objects
+    visible: true,
+    size: 100,
+  }
+}
+
+/* -------------------------
+   Stage & UI rendering
+   ------------------------- */
+const stageView = document.getElementById('stageView')
+const scriptsArea = document.getElementById('scriptsArea')
+const palette = document.getElementById('palette')
+const spriteCount = document.getElementById('spriteCount')
+const spriteX = document.getElementById('spriteX')
+const spriteY = document.getElementById('spriteY')
+const spriteRot = document.getElementById('spriteRot')
+const status = document.getElementById('status')
+
+function renderSprites(){
+  stageView.innerHTML = ''
+  app.sprites.forEach((s,idx)=>{
+    const el = document.createElement('div')
+    el.className = 'sprite'
+    el.dataset.idx = idx
+    el.style.left = `calc(50% + ${s.x}px)`
+    el.style.top = `calc(50% - ${s.y}px)`
+    el.style.transform = `translate(-50%,-50%) rotate(${s.rot}deg) scale(${s.size/100})`
+    el.innerHTML = `<div style="text-align:center"><div class="name">${s.name}</div></div>`
+    // touch drag for sprite movement
+    let dragging=false, last={x:0,y:0}
+    function startDrag(e){
+      e.preventDefault()
+      dragging=true
+      last = getPos(e)
+      el.style.transition='none'
+      selectSprite(idx)
+    }
+    function moveDrag(e){
+      if(!dragging) return
+      const p = getPos(e)
+      const dx = p.x - last.x
+      const dy = p.y - last.y
+      last = p
+      // stage coordinate system: center is 0,0, +x right, +y up (we'll map DOM)
+      s.x += dx
+      s.y -= dy
+      renderSprites()
+      updateInspector()
+    }
+    function endDrag(){dragging=false;el.style.transition='transform 120ms ease'}
+    el.addEventListener('pointerdown', startDrag)
+    window.addEventListener('pointermove', moveDrag)
+    window.addEventListener('pointerup', endDrag)
+    // tap to select
+    el.addEventListener('click', ()=>selectSprite(idx))
+    stageView.appendChild(el)
+  })
+  spriteCount.textContent = app.sprites.length
+}
+
+function getPos(e){
+  if(e.touches && e.touches[0]) e = e.touches[0]
+  return {x: e.clientX, y: e.clientY}
+}
+
+function selectSprite(idx){
+  app.selectedSpriteIndex = idx
+  updateInspector()
+  renderScripts()
+}
+
+function updateInspector(){
+  const s = app.sprites[app.selectedSpriteIndex]
+  if(!s) return
+  spriteX.textContent = Math.round(s.x)
+  spriteY.textContent = Math.round(s.y)
+  spriteRot.textContent = Math.round(s.rot)
+}
+
+/* -------------------------
+   Palette drag/drop -> scripts
+   ------------------------- */
+let draggedBlock = null
+
+palette.querySelectorAll('.block').forEach(b=>{
+  b.addEventListener('pointerdown', (e)=>{
+    e.preventDefault()
+    // create a copy block instance
+    draggedBlock = JSON.parse(b.dataset.block || '{}')
+    // if block has no body but is repeat, add body holder
+    if(draggedBlock.type==='repeat' && !draggedBlock.body) draggedBlock.body=[]
+    // show a floating preview
+    const preview = b.cloneNode(true)
+    preview.style.position='fixed'
+    preview.style.zIndex=9999
+    preview.style.pointerEvents='none'
+    preview.style.left=(e.clientX+6)+'px'
+    preview.style.top=(e.clientY+6)+'px'
+    preview.id='dragPreview'
+    document.body.appendChild(preview)
+    function move(e2){const p=getPos(e2);preview.style.left=(p.x+6)+'px';preview.style.top=(p.y+6)+'px'}
+    function up(e2){
+      window.removeEventListener('pointermove', move)
+      window.removeEventListener('pointerup', up)
+      const previewEl = document.getElementById('dragPreview')
+      if(previewEl) previewEl.remove()
+      // if dropped inside scriptsArea, append to selected sprite scripts
+      const dropRect = scriptsArea.getBoundingClientRect()
+      const p = getPos(e2)
+      if(p.x>=dropRect.left && p.x<=dropRect.right && p.y>=dropRect.top && p.y<=dropRect.bottom){
+        const copy = deepCopyBlock(draggedBlock)
+        appendBlockToScripts(copy)
+      }
+      draggedBlock = null
+    }
+    window.addEventListener('pointermove', move)
+    window.addEventListener('pointerup', up)
+  })
+})
+
+function deepCopyBlock(b){
+  return JSON.parse(JSON.stringify(b))
+}
+
+function appendBlockToScripts(block){
+  const s = app.sprites[app.selectedSpriteIndex]
+  if(!s) return
+  s.scripts.push(block)
+  renderScripts()
+}
+
+/* -------------------------
+   Scripts UI
+   ------------------------- */
+function renderScripts(){
+  scriptsArea.innerHTML=''
+  const s = app.sprites[app.selectedSpriteIndex]
+  if(!s) { scriptsArea.innerHTML = '<div class="project-meta">No sprite selected</div>'; return }
+  s.scripts.forEach((b,idx)=>{
+    const el = document.createElement('div')
+    el.className='script-block'
+    el.dataset.idx = idx
+    el.innerHTML = `<div class="handle">≡</div><div class="label">${renderBlockLabel(b)}</div><div class="small">#${idx+1}</div>`
+    // tap to edit simple params inline
+    el.addEventListener('click', async (ev)=>{
+      ev.stopPropagation()
+      await editBlockInline(b)
+      renderScripts()
+    })
+    // long-press to delete (mobile)
+    let pressTimer
+    el.addEventListener('pointerdown', ()=>{ pressTimer = setTimeout(()=>{ if(confirm('Delete this block?')){ s.scripts.splice(idx,1); renderScripts() }}, 700)})
+    el.addEventListener('pointerup', ()=>clearTimeout(pressTimer))
+    // simple reorder: drag handle to move up/down
+    let dragging=false,startY=0;
+    const handle = el.querySelector('.handle')
+    handle.addEventListener('pointerdown',(e)=>{e.stopPropagation();dragging=true;startY=e.clientY;el.style.opacity=0.6})
+    window.addEventListener('pointermove',(e)=>{ if(!dragging) return; const dy=e.clientY-startY; if(dy<-40 && idx>0){swapBlocks(s.scripts,idx,idx-1); dragging=false; renderScripts()} if(dy>40 && idx<s.scripts.length-1){swapBlocks(s.scripts,idx,idx+1); dragging=false; renderScripts()} })
+    window.addEventListener('pointerup',()=>{if(dragging){dragging=false;el.style.opacity=1}})
+    // double-tap to open nested editor for repeat
+    el.addEventListener('dblclick',()=>{
+      if(b.type==='repeat'){
+        openRepeatEditor(b)
+      }
+    })
+    scriptsArea.appendChild(el)
+  })
+}
+
+function renderBlockLabel(b){
+  switch(b.type){
+    case 'move': return `move ${b.params.steps} steps`
+    case 'turn': return `turn ${b.params.deg}°`
+    case 'say': return `say "${b.params.text}" for ${b.params.secs}s`
+    case 'wait': return `wait ${b.params.secs}s`
+    case 'repeat': return `repeat ${b.params.times} times`
+    case 'setxy': return `set x:${b.params.x} y:${b.params.y}`
+    default: return JSON.stringify(b)
+  }
+}
+
+function swapBlocks(arr,i,j){ [arr[i],arr[j]] = [arr[j],arr[i]] }
+
+async function editBlockInline(b){
+  switch(b.type){
+    case 'move': {
+      const val = prompt('Steps:', b.params.steps); if(val!==null) b.params.steps = Number(val)||0; break
+    }
+    case 'turn': {
+      const val = prompt('Degrees:', b.params.deg); if(val!==null) b.params.deg = Number(val)||0; break
+    }
+    case 'say': {
+      const t = prompt('Message:', b.params.text); if(t!==null) b.params.text = t
+      const secs = prompt('Seconds:', b.params.secs); if(secs!==null) b.params.secs = Number(secs)||0; break
+    }
+    case 'wait': {
+      const secs = prompt('Seconds:', b.params.secs); if(secs!==null) b.params.secs = Number(secs)||0; break
+    }
+    case 'repeat': {
+      const times = prompt('Times:', b.params.times); if(times!==null) b.params.times = Number(times)||1; break
+    }
+    case 'setxy': {
+      const x = prompt('X:', b.params.x); if(x!==null) b.params.x = Number(x)||0
+      const y = prompt('Y:', b.params.y); if(y!==null) b.params.y = Number(y)||0; break
+    }
+  }
+}
+
+function openRepeatEditor(block){
+  // simplistic inline editor: allow user to add nested blocks
+  const temp = JSON.stringify(block.body,null,2)
+  const raw = prompt('Edit nested blocks JSON (array of blocks):', temp)
+  if(raw!==null){
+    try{
+      const parsed = JSON.parse(raw)
+      block.body = parsed
+    }catch(e){
+      alert('Invalid JSON')
+    }
+  }
+}
+
+/* -------------------------
+   Simple interpreter
+   ------------------------- */
+async function runProject(){
+  if(app.running) return
+  app.running = true
+  app.execToken = {stop:false}
+  status.textContent = 'Running'
+  // execute all sprites scripts sequentially (for demo). You can extend to concurrency.
+  for(let si=0; si<app.sprites.length; si++){
+    const s = app.sprites[si]
+    for(let i=0;i<s.scripts.length;i++){
+      if(app.execToken.stop) break
+      await runBlock(s, s.scripts[i], app.execToken)
+    }
+    if(app.execToken.stop) break
+  }
+  status.textContent = app.execToken.stop ? 'Stopped' : 'Finished'
+  app.running = false
+}
+
+async function runBlock(sprite, block, token){
+  if(token.stop) return
+  switch(block.type){
+    case 'move': {
+      const steps = Number(block.params.steps)||0
+      // animate move over 200ms
+      const duration = 200
+      const dx = steps
+      const frames = 10
+      for(let f=0; f<frames; f++){
+        if(token.stop) return
+        sprite.x += dx/frames
+        renderSprites()
+        updateInspector()
+        await sleep(duration/frames)
+      }
+      break
+    }
+    case 'turn': {
+      sprite.rot = (sprite.rot + Number(block.params.deg)||0)%360
+      renderSprites();updateInspector();await sleep(150);break
+    }
+    case 'say': {
+      const text = block.params.text||''
+      const secs = Number(block.params.secs)||1
+      const el = createSpeechBubble(sprite, text)
+      await sleep(secs*1000)
+      el.remove()
+      break
+    }
+    case 'wait': {
+      await sleep((Number(block.params.secs)||0)*1000);break
+    }
+    case 'repeat': {
+      const times = Number(block.params.times)||1
+      for(let t=0;t<times;t++){
+        if(token.stop) return
+        for(const sub of block.body || []){
+          await runBlock(sprite, sub, token)
+          if(token.stop) return
+        }
+      }
+      break
+    }
+    case 'setxy': {
+      sprite.x = Number(block.params.x)||0
+      sprite.y = Number(block.params.y)||0
+      renderSprites();updateInspector();await sleep(120);break
+    }
+  }
+}
+
+function createSpeechBubble(sprite, text){
+  // find DOM node for this sprite
+  const idx = app.sprites.indexOf(sprite)
+  const el = stageView.querySelector(`.sprite[data-idx="${idx}"]`)
+  const bubble = document.createElement('div')
+  bubble.style.position='absolute'
+  bubble.style.pointerEvents='none'
+  bubble.style.left = el.style.left
+  bubble.style.top = `calc(${el.style.top} - 60px)`
+  bubble.style.transform='translate(-50%,-100%)'
+  bubble.style.background='rgba(255,255,255,0.95)'
+  bubble.style.color='#012'
+  bubble.style.padding='8px 10px'
+  bubble.style.borderRadius='10px'
+  bubble.style.fontWeight='700'
+  bubble.textContent = text
+  stageView.appendChild(bubble)
+  return bubble
+}
+
+function sleep(ms){ return new Promise(r=>setTimeout(r,ms)) }
+
+/* -------------------------
+   Project save/load/export/import
+   ------------------------- */
+const saveBtn = document.getElementById('saveBtn')
+const loadBtn = document.getElementById('loadBtn')
+const exportBtn = document.getElementById('exportBtn')
+const importBtn = document.getElementById('importBtn')
+const runBtn = document.getElementById('runBtn')
+const stopBtn = document.getElementById('stopBtn')
+const runBtnM = document.getElementById('runBtnM')
+const stopBtnM = document.getElementById('stopBtnM')
+const addSpriteBtn = document.getElementById('addSprite')
+const duplicateSpriteBtn = document.getElementById('duplicateSprite')
+const deleteSpriteBtn = document.getElementById('deleteSprite')
+const clearScriptsBtn = document.getElementById('clearScripts')
+
+saveBtn.addEventListener('click', ()=>saveProject(true))
+loadBtn.addEventListener('click', ()=>loadProject())
+exportBtn.addEventListener('click', ()=>exportProject())
+importBtn.addEventListener('click', ()=>importProject())
+runBtn.addEventListener('click', ()=>runProject())
+stopBtn.addEventListener('click', ()=>{ app.execToken.stop=true; status.textContent='Stopping'; })
+runBtnM.addEventListener('click', ()=>runProject())
+stopBtnM.addEventListener('click', ()=>{ app.execToken.stop=true; status.textContent='Stopping'; })
+addSpriteBtn.addEventListener('click', ()=>{ app.sprites.push(createSprite('Sprite '+(app.sprites.length+1))); renderSprites(); renderScripts(); })
+duplicateSpriteBtn.addEventListener('click', ()=>{ const s = app.sprites[app.selectedSpriteIndex]; if(!s) return; const copy = JSON.parse(JSON.stringify(s)); copy.id=uid('s_'); copy.name += ' copy'; app.sprites.push(copy); renderSprites(); })
+deleteSpriteBtn.addEventListener('click', ()=>{ if(app.sprites.length<=1){ alert('Keep at least one sprite'); return } if(confirm('Delete sprite?')){ app.sprites.splice(app.selectedSpriteIndex,1); app.selectedSpriteIndex = 0; renderSprites(); renderScripts(); updateInspector(); }})
+clearScriptsBtn.addEventListener('click', ()=>{ if(!app.sprites[app.selectedSpriteIndex]) return; if(confirm('Clear all scripts for selected sprite?')){ app.sprites[app.selectedSpriteIndex].scripts=[]; renderScripts() }})
+
+function projectData(){
+  return {
+    meta:{name:'iScratch project',created:Date.now()},
+    sprites: app.sprites
+  }
+}
+
+function saveProject(showToast=false){
+  localStorage.setItem('iscratch.project', JSON.stringify(projectData()))
+  if(showToast) alert('Project saved locally')
+}
+
+function loadProject(){
+  const raw = localStorage.getItem('iscratch.project')
+  if(!raw){ alert('No saved project'); return }
+  try{
+    const data = JSON.parse(raw)
+    app.sprites = data.sprites || [createSprite()]
+    app.selectedSpriteIndex = 0
+    renderSprites(); renderScripts(); updateInspector()
+    alert('Project loaded')
+  }catch(e){ alert('Failed to load project') }
+}
+
+function exportProject(){
+  const data = JSON.stringify(projectData(),null,2)
+  const blob = new Blob([data],{type:'application/json'})
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = 'iscratch-project.json'
+  document.body.appendChild(a)
+  a.click()
+  a.remove()
+  URL.revokeObjectURL(url)
+}
+
+function importProject(){
+  const inp = document.createElement('input')
+  inp.type='file'
+  inp.accept='application/json'
+  inp.onchange = async (e)=>{
+    const f = e.target.files[0]
+    if(!f) return
+    const txt = await f.text()
+    try{
+      const data = JSON.parse(txt)
+      app.sprites = data.sprites || [createSprite()]
+      app.selectedSpriteIndex = 0
+      renderSprites(); renderScripts(); updateInspector()
+      alert('Project imported')
+    }catch(err){ alert('Invalid project file') }
+  }
+  inp.click()
+}
+
+/* -------------------------
+   Init default project
+   ------------------------- */
+function init(){
+  // basic default sprite
+  if(!app.sprites.length) app.sprites.push(createSprite('Sprite1'))
+  renderSprites()
+  renderScripts()
+  updateInspector()
+  // register service worker for PWA (if available)
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('sw.js').catch(()=>{})
+  }
+  // load local project automatically if exists
+  const raw = localStorage.getItem('iscratch.project')
+  if(raw){
+    try{
+      const data = JSON.parse(raw)
+      if(data.sprites) app.sprites = data.sprites
+    }catch(e){}
+  }
+  renderSprites(); renderScripts(); updateInspector()
+}
+
+init()
+</script>
+</body>
+</html>
